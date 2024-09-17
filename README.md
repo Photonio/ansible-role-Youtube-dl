@@ -3,11 +3,20 @@ youtube-dl
 
 https://github.com/ytdl-org/youtube-dl
 
-install methods:
+# install methods:
 - Build from source
 - Arch AUR PKGBuilds
 - Gentoo Emerge
 - Nix.OS
+
+# Alias: ydl
+This adds a bash alias to activate a python venv that contains youtube-dl!
+
+```
+ydl
+# Then
+youtube-dl $URL
+```
 
 Requirements
 ------------

@@ -1,0 +1,27 @@
+---
+
+- name: Ensure the virtual environment exists
+  pip:
+    name: psutil
+    virtualenv: "{{ venv_dir }}"
+    virtualenv_command: "{{ discovered_interpreter_python }} -m venv"
+    # || {{ ansible_python.executable }}
+
+- name: Install youtube-dl in Venv
+  ansible.builtin.shell: |
+    source {{ venv_dir }}/bin/activate
+    pip install .
+  args:
+    chdir: "{{ git_dir }}"
+    creates: "{{ venv_dir }}/bin/youtube-dl"
+    executable: /usr/bin/bash   # Works with Bash, but not normal 'sh'
+
+- name: Alias "ydl" to activate venv
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_env.HOME }}/.{{ item }}"
+    marker: "#<!-- {mark} ANSIBLE MANAGED BLOCK youtube-dl -->"
+    block: |
+      alias ydl="source {{ venv_dir }}/bin/activate"
+  loop:
+  - profile
+  - bashrc
