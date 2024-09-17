@@ -1,3 +1,5 @@
 ---
 # defaults file for try
 source: Build from source
+
+git_version: latest #"2024.07.11-nightly"
