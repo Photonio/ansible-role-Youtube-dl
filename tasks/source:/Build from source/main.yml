@@ -1,0 +1,24 @@
+---
+
+- debug:
+    msg: Build from Source
+
+- name: Install dependencies
+  ansible.builtin.apt:
+    pkg:
+    - build-essential
+    - git
+    - python3
+  become: true
+
+- name: Create a directory
+  ansible.builtin.file:
+    path: "{{ build_dir }}"
+    state: directory
+
+- name: Git clone
+  ansible.builtin.git:
+    repo: "{{ git_repo }}"
+    dest: "{{ git_dir }}"
+    update: no
+    version: "{{ git_version }}"

@@ -1,0 +1,6 @@
+---
+build_dir: "{{ ansible_env.HOME }}/src"
+
+git_version: "2024.07.11-nightly"
+git_repo: https://github.com/ytdl-org/youtube-dl.git
+git_dir: "{{ build_dir }}/youtube-dl"
